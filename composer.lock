@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d0faa53bde65e32899a4710e3fdda42e",
+    "hash": "d22c47fd0658c368fcba512f95bfa78d",
     "packages": [
         {
             "name": "cimmwolf/bootstrap-material",
