@@ -1,0 +1,109 @@
+2015/07/26 17:59:55 [error] [system.db.CDbCommand] Error in preparing SQL: DELETE FROM YiiCache WHERE expire>0 AND expire<1437922795
+2015/07/26 17:59:55 [error] [system.db.CDbCommand] Не удалось выполнить CDbCommand::execute(): CDbCommand не удалось подготовить SQL-запрос: SQLSTATE[HY000]: General error: 1 no such table: YiiCache. Выполнявшийся SQL-запрос: DELETE FROM YiiCache WHERE expire>0 AND expire<1437922795.
+2015/07/26 18:03:24 [error] [exception.CHttpException.410] exception 'CHttpException' with message 'Страница навсегда удалена.' in /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/protected/controllers/SiteController.php:77
+Stack trace:
+#0 [internal function]: SiteController->actionCatalog('11', Array)
+#1 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CAction.php(109): ReflectionMethod->invokeArgs(Object(SiteController), Array)
+#2 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(SiteController), Object(ReflectionMethod), Array)
+#3 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(282): CController->run('catalog')
+#12 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/catalog')
+#13 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/index.php(16): CApplication->run()
+#15 {main}
+REQUEST_URI=/catalog/11?sort=brand
+---
+2015/07/26 18:37:57 [info] [application] Невозможно упростить цвет: цветной
+2015/07/26 18:38:21 [info] [application] Невозможно упростить цвет: т серый|с серый|сероголубой|серый блеск|серо-розовый|серый
+2015/07/26 18:48:26 [error] [exception.CHttpException.410] exception 'CHttpException' with message 'Страница навсегда удалена.' in /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/protected/controllers/SiteController.php:77
+Stack trace:
+#0 [internal function]: SiteController->actionCatalog('10', Array)
+#1 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CAction.php(109): ReflectionMethod->invokeArgs(Object(SiteController), Array)
+#2 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(SiteController), Object(ReflectionMethod), Array)
+#3 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(282): CController->run('catalog')
+#12 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/catalog')
+#13 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/index.php(16): CApplication->run()
+#15 {main}
+REQUEST_URI=/catalog/10?size=41.5
+---
+2015/07/26 19:20:28 [info] [application] Невозможно упростить цвет: цветной
+2015/07/26 19:26:51 [info] [application] Невозможно упростить цвет: цветной
+2015/07/26 19:28:24 [error] [exception.CHttpException.410] exception 'CHttpException' with message 'Страница навсегда удалена.' in /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/protected/controllers/SiteController.php:77
+Stack trace:
+#0 [internal function]: SiteController->actionCatalog('7', Array)
+#1 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CAction.php(109): ReflectionMethod->invokeArgs(Object(SiteController), Array)
+#2 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(SiteController), Object(ReflectionMethod), Array)
+#3 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(282): CController->run('catalog')
+#12 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/catalog')
+#13 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/index.php(16): CApplication->run()
+#15 {main}
+REQUEST_URI=/catalog/7?8=
+---
+2015/07/26 19:34:02 [error] [exception.CHttpException.410] exception 'CHttpException' with message 'Страница навсегда удалена.' in /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/protected/controllers/SiteController.php:77
+Stack trace:
+#0 [internal function]: SiteController->actionCatalog('48', Array)
+#1 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CAction.php(109): ReflectionMethod->invokeArgs(Object(SiteController), Array)
+#2 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(SiteController), Object(ReflectionMethod), Array)
+#3 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(282): CController->run('catalog')
+#12 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/catalog')
+#13 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/index.php(16): CApplication->run()
+#15 {main}
+REQUEST_URI=/catalog/48?size=48
+---
+2015/07/26 20:02:01 [error] [exception.CHttpException.410] exception 'CHttpException' with message 'Страница навсегда удалена.' in /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/protected/controllers/SiteController.php:77
+Stack trace:
+#0 [internal function]: SiteController->actionCatalog('49', Array)
+#1 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CAction.php(109): ReflectionMethod->invokeArgs(Object(SiteController), Array)
+#2 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/actions/CInlineAction.php(47): CAction->runWithParamsInternal(Object(SiteController), Object(ReflectionMethod), Array)
+#3 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(282): CController->run('catalog')
+#12 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/catalog')
+#13 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/vendor/yiisoft/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /var/www/luxoutlet/data/src/luxoutlet.ru/production/releases/20150726145901/index.php(16): CApplication->run()
+#15 {main}
+REQUEST_URI=/catalog/49?size=&6=%D0%B3%D0%BE%D0%BB%D1%83%D0%B1%D0%BE%D0%B9&sort=&brand=13
+---
+2015/07/26 20:07:56 [info] [application] Невозможно упростить цвет: цветной
+2015/07/26 20:08:05 [info] [application] Невозможно упростить цвет: цветной
+2015/07/26 20:08:15 [info] [application] Невозможно упростить цвет: цветной

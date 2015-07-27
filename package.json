@@ -1,0 +1,19 @@
+{
+  "name": "log-analyzer",
+  "version": "0.0.1",
+  "description": "Log analyzer for Yii and Nginx logs",
+  "main": "index.html",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "github:cimmwolf/log-analyzer.git",
+  "author": "Denis Beliaev",
+  "license": "MIT"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "cimmwolf/log-analyzer",
+  "autoload": {
+    "psr-4": {"DenisBeliaev\\logAnalyzer\\": "src"}
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/cimmwolf/bootstrap-material"
+    }
+  ],
+  "require": {
+    "phpunit/phpunit": "^4.7.7",
+    "cimmwolf/bootstrap-material": "^0.0.1"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Denis Beliaev",
+      "email": "cimmwolf@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable"
+}
