@@ -14,7 +14,7 @@ Get started
 2. run `composer install`;
 3. run `npm install`;
 4. run `gulp`;
-2. run `php -f fill-db.php -s LOG_SOURCE -n PROJECT_NAME -t TIMEZONE`  
+2. run `php fill-db.php -s LOG_SOURCE -n PROJECT_NAME -t TIMEZONE`  
    where:  
    `LOG_SOURCE` — comma separated paths to log files. It's may be urls. Analyzer recognize format automatically.  
    `PROJECT_NAME` — name of your project.  
@@ -35,7 +35,7 @@ Get started
 2. запустите команду `composer install`;
 3. запустите команду `npm install`;
 4. запустите команду `gulp`;
-2. запустите команду: `php -f fill-db.php -s LOG_SOURCE -n PROJECT_NAME -t TIMEZONE`  
+2. запустите команду: `php fill-db.php -s LOG_SOURCE -n PROJECT_NAME -t TIMEZONE`  
    где:  
    `LOG_SOURCE` — пути до логов, разделённые запятыми. Пути могут быть URL. Анализатор самостоятельно определит тип логов.  
    `PROJECT_NAME` — название вашего проекта.  

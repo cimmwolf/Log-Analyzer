@@ -1,6 +1,6 @@
 {
   "name": "log-analyzer",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Log analyzer for Yii and Nginx logs",
   "main": "index.html",
   "directories": {
