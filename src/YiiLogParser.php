@@ -8,10 +8,10 @@ class YiiLogParser
         $output = [];
         foreach ($log as $key => $string) {
             $matches = [];
-            if(!preg_match('~([0-9/]{10}\s[0-9:]{8})\s\[(.*?)\]\s\[.*?\]\s(.*)~', $string, $matches))
+            if (!preg_match('~([0-9/]{10}\s[0-9:]{8})\s\[(.*?)\]\s\[.*?\]\s(.*)~', $string, $matches))
                 continue;
 
-            $row = $matches[3];
+            $row = ['message' => $matches[3]];
             $row['logTime'] = strtotime($matches[1]);
             $row['level'] = $matches[2];
             $output[] = $row;

@@ -21,7 +21,7 @@ gulp.task('less', function () {
 gulp.task('coffee', function () {
     gulp.src('./coffee/*.coffee')
         .pipe(coffee())
-        .pipe(uglify())
+        .pipe(uglify({mangle: false}))
         .pipe(gulp.dest('./js/'))
 });
 
