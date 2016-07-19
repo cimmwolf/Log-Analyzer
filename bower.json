@@ -1,0 +1,20 @@
+{
+  "name": "log-analyzer",
+  "description": "Log analyzer for Yii and Nginx logs",
+  "main": "index.html",
+  "authors": [
+    "Denis Beliaev"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/cimmwolf/log-analyzer",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "google-chart": "GoogleWebComponents/google-chart#^1.0.6"
+  }
+}

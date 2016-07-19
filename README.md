@@ -1,6 +1,5 @@
 Log Analyzer
 ============
-[english]
 Requirements
 ------------
 * PHP (with sqlite3) >= 5.4;
@@ -13,6 +12,7 @@ Get started
 1. download project into web accessible directory on the server;
 2. run `composer install`;
 3. run `npm install`;
+4. run `bower install`;
 4. run `gulp`;
 2. run `php fill-db.php -s LOG_SOURCE -n PROJECT_NAME -t TIMEZONE`  
    where:  
@@ -22,7 +22,6 @@ Get started
 
 3. open index.html from browser.
 
-[russian]
 Требования
 ----------
 * PHP (with pdo-sqlite3) >= 5.4
@@ -34,6 +33,7 @@ Get started
 1. скачайте проект в директорию доступную из сети;
 2. запустите команду `composer install`;
 3. запустите команду `npm install`;
+4. запустите команду `bower install`;
 4. запустите команду `gulp`;
 2. запустите команду: `php fill-db.php -s LOG_SOURCE -n PROJECT_NAME -t TIMEZONE`  
    где:  

@@ -18,21 +18,22 @@ class Statistic
         $this->pdo = new \PDO('sqlite:' . $dbPath);
     }
 
-    /** Return statistic data for last 24 hours.
+    /** Return statistic data grouped by hours.
      * @return array Format: [[Label1, .., LabelN], [Value1, .., ValueN], ..]
      */
     public function getHourlyData()
     {
-        $output = [['Info', 'Warnings', 'Errors']];
+        $output = [['Date', 'Info', 'Warnings', 'Errors']];
         $stmt = $this->pdo->prepare("
           SELECT level, COUNT(*) FROM data 
           WHERE strftime('%s', logdate) >= :start AND strftime('%s', logdate) <= :end
           GROUP BY level");
 
-        for ($i = 0; $i <= 23; $i++) {
-            $t = strtotime($i . ' hours ago');
-            list($H, $n, $j, $Y) = explode(',', date('H,n,j,Y', $t));
-            $stmt->execute([':start' => mktime($H, 0, 0, $n, $j, $Y), ':end' => mktime($H, 59, 59, $n, $j, $Y)]);
+        $t = strtotime('1 week ago');
+        list($H, $n, $j, $Y) = explode(',', date('H,n,j,Y', $t));
+        $t = mktime($H, 0, 0, $n, $j, $Y);
+        while ($t < time()) {
+            $stmt->execute([':start' => $t, ':end' => $t + 60 * 60 - 1]);
 
             list($info, $warnings, $errors) = [0, 0, 0];
             foreach ($stmt->fetchAll() as $row) {
@@ -43,7 +44,10 @@ class Statistic
                 if ($row['level'] == 'error')
                     $errors = $row[1];
             }
-            $output[] = [$info, $warnings, $errors];
+            if (count($output) > 1 OR ($info + $warnings + $errors) > 0)
+                $output[] = [date('H:00 j M', $t + 60 * 60), $info, $warnings, $errors];
+
+            $t += 60 * 60;
         }
         return $output;
     }
