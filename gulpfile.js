@@ -1,30 +1,33 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
 var autoprefixer = require('gulp-autoprefixer');
-var minifyCss = require('gulp-minify-css');
+var cssnano = require('gulp-cssnano');
 var coffee = require('gulp-coffee');
 var uglify = require('gulp-uglify');
 
+gulp.task('default', ['less', 'coffee'], function () {
+    gulp.src('dist/js/*.js')
+        .pipe(uglify({mangle: false}))
+        .pipe(gulp.dest('dist/js'));
+    return gulp.src('dist/css/*.css')
+        .pipe(cssnano())
+        .pipe(gulp.dest('dist/css'));
+});
+
 gulp.task('less', function () {
-    return gulp.src('./less/style.less')
+    return gulp.src('src/less/style.less')
         .pipe(less({
-            paths: ['./vendor/twbs/bootstrap/less']
+            paths: ['vendor/twbs/bootstrap/less']
         }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(minifyCss())
-        .pipe(gulp.dest('./css'));
+        .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('coffee', function () {
-    gulp.src('./coffee/*.coffee')
+    gulp.src('src/coffee/*.coffee')
         .pipe(coffee())
-        .pipe(uglify({mangle: false}))
-        .pipe(gulp.dest('./js/'))
-});
-
-gulp.task('default', ['less', 'coffee'], function () {
-    // place code for your default task here
+        .pipe(gulp.dest('dist/js/'))
 });

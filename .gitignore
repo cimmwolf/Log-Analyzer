@@ -1,11 +1,5 @@
-### PHPStorm
+/dist/
+
 /.idea/
-
-### Composer
 /vendor/
-
-### Vagrant
-/.vagrant/
-
-### NPM
 /node_modules/
