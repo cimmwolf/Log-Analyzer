@@ -47,6 +47,6 @@ class U
     private static function deleteOldRows($pathToDb)
     {
         $pdo = new \PDO('sqlite:' . $pathToDb);
-        $pdo->query("DELETE FROM data WHERE datetime(logdate, 'localtime') < datetime('now','-3 days')");
+        $pdo->query("DELETE FROM data WHERE datetime(logdate, 'localtime') < datetime('now', '-7 days', '-1 hours')");
     }
 }
