@@ -57,13 +57,11 @@ class YiiLogParserTest extends PHPUnit_Framework_TestCase
      */
     public function testForParseWrongFormat()
     {
-        $filename = __DIR__ . '/wrong.log';
-        file_put_contents($filename, 'wrong format');
+        $tf = tmpfile();
+        fwrite($tf, "wrong format");
+        $filename = stream_get_meta_data($tf)['uri'];
         $log = new Parser($filename);
-        $parsedLog = $log->parse();
-        unlink($filename);
-        $this->assertInternalType('array', $parsedLog);
-        $this->assertCount(0, $parsedLog);
+        $log->parse();
     }
 
     /**
