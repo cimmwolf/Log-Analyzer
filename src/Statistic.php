@@ -39,7 +39,7 @@ class Statistic
             foreach ($stmt->fetchAll() as $row) {
                 if ($row['level'] == 'info')
                     $info = $row[1];
-                if ($row['level'] == 'warning')
+                if ($row['level'] == 'warn')
                     $warnings = $row[1];
                 if ($row['level'] == 'error')
                     $errors = $row[1];

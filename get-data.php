@@ -19,6 +19,7 @@ foreach (glob(__DIR__ . "/store/*.sqlite3") as $pathToDb) {
         $error = '(ошибка обновления)';
     }
 
+    new \DenisBeliaev\logAnalyzer\Migration($pdo);
     $data = $pdo->query('SELECT *, COUNT(logdate) AS count FROM data GROUP BY message ORDER BY logdate DESC')->fetchAll(PDO::FETCH_ASSOC);
 
     $output[] = [

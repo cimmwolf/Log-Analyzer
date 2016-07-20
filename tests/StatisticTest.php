@@ -32,7 +32,7 @@ class StatisticTest extends \PHPUnit\Framework\TestCase
             $logDate = date('c', strtotime($i . ' hours ago'));
             $stmt->execute([':logdate' => $logDate, ':level' => 'error', ':message' => 'Test error']);
             $stmt->execute([':logdate' => $logDate, ':level' => 'info', ':message' => 'Test info']);
-            $stmt->execute([':logdate' => $logDate, ':level' => 'warning', ':message' => 'Test warning']);
+            $stmt->execute([':logdate' => $logDate, ':level' => 'warn', ':message' => 'Test warning']);
         }
     }
 
