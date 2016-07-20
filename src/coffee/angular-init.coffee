@@ -3,8 +3,8 @@ logsApp = angular.module('logsApp', ['ngSanitize'])
   (message) ->
     message.replace(
       /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/gi,
-        (match) ->
-          decodeURI(match)
+      (match) ->
+        decodeURI(match)
     ).replace(
       /(GET )(.*?%.*?)( HTTP\/)/g,
       (match, p1, p2, p3) ->
@@ -21,6 +21,9 @@ logsApp = angular.module('logsApp', ['ngSanitize'])
 
 logsApp.controller 'logsCtrl', ($scope, $http) ->
   $http.get('get-data.php').success (data) ->
+    for log in data
+      log.chartData = '/statistic.php?source=' + log.name
+
     $scope.logs = data
     return
   return

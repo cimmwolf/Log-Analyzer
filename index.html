@@ -23,19 +23,14 @@
     <div class="row">
         <div class="col-sm-6" ng-repeat="log in logs">
             <h1 class="text-center">{{log.name}} {{log.error}}</h1>
-            <google-chart data="/statistic.php?source={{log.name}}" type="line"
+
+            <google-chart ng-attr-data="{{log.chartData}}" type="line"
                           options='{
                             "colors":["#00bfa5", "#ffd600", "#d50000"],
                             "backgroundColor":"transparent",
-                            "legend": {
-                                 "textStyle":{"color": "#fff"}
-                            },
-                            "hAxis": {
-                                "textStyle":{"color": "#fff"}
-                            },
-                            "vAxis": {
-                                "textStyle":{"color": "#fff"}
-                            }
+                            "legend": {"textStyle":{"color": "#fff"}},
+                            "hAxis": {"textStyle":{"color": "#fff"}},
+                            "vAxis": {"textStyle":{"color": "#fff"}}
                           }'></google-chart>
             <div class="form-group">
                 <input ng-model="query" class="form-control" placeholder="Искать:">
