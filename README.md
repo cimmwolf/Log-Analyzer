@@ -4,11 +4,12 @@ Requirements
 ------------
 * PHP (with sqlite3) >= 5.6;
 * Composer;
-* NPM.
+* NPM;
+* Bower;
+* Gulp.
 
 Get started
 -----------
-
 1. download project into web accessible directory on the server;
 2. run `composer install`;
 3. run `npm install`;
@@ -22,12 +23,6 @@ Get started
                  logs can use different timezones.
 
 3. open index.html from browser.
-
-Требования
-----------
-* PHP (with pdo-sqlite3) >= 5.6
-* Composer;
-* NPM.
 
 Быстрый старт:
 -------------
