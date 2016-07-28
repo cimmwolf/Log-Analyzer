@@ -34,7 +34,7 @@ class U
                 if ($row['logTime'] > strtotime('-3 days')) {
                     $logDate = date('c', $row['logTime']);
                     $level = $row['level'];
-                    $message = $row['message'];
+                    $message = mb_convert_encoding($row['message'], 'utf-8');
                     $stmt->execute();
                 }
             }
