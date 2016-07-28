@@ -2,7 +2,7 @@ Log Analyzer
 ============
 Requirements
 ------------
-* PHP (with sqlite3) >= 5.4;
+* PHP (with sqlite3) >= 5.6;
 * Composer;
 * NPM.
 
@@ -18,13 +18,14 @@ Get started
    where:  
    `LOG_SOURCE` — comma separated paths to log files. It's may be urls. Analyzer recognize format automatically.  
    `PROJECT_NAME` — name of your project.  
-   `TIMEZONE` — logs dates timezone. List of values: http://php.net/manual/ru/timezones.php;
+   `TIMEZONE` — logs dates timezone. List of values: http://php.net/manual/ru/timezones.php. Be careful, Nginx and Yii 
+                 logs can use different timezones.
 
 3. open index.html from browser.
 
 Требования
 ----------
-* PHP (with pdo-sqlite3) >= 5.4
+* PHP (with pdo-sqlite3) >= 5.6
 * Composer;
 * NPM.
 
@@ -39,6 +40,7 @@ Get started
    где:  
    `LOG_SOURCE` — пути до логов, разделённые запятыми. Пути могут быть URL. Анализатор самостоятельно определит тип логов.  
    `PROJECT_NAME` — название вашего проекта.  
-   `TIMEZONE` — временная зона для анализа даты в логах. Список значений: http://php.net/manual/ru/timezones.php;
+   `TIMEZONE` — временная зона для анализа даты в логах. Список значений: http://php.net/manual/ru/timezones.php. Внимание,
+                 логи Nginx и Yii могут использовать разные часовые пояса.
 
 3. откройте файл index.html в браузере.
