@@ -44,8 +44,12 @@ class Statistic
                 if ($row['level'] == 'error')
                     $errors = $row[1];
             }
-            if (count($output) > 1 OR ($info + $warnings + $errors) > 0)
-                $output[] = [date('H:00 j M', $t + 60 * 60), $info, $warnings, $errors];
+            if (count($output) > 1 OR ($info + $warnings + $errors) > 0) {
+                $logTimestamp = $t + 60 * 60;
+                if ($logTimestamp > time())
+                    $logTimestamp = time();
+                $output[] = [$logTimestamp, $info, $warnings, $errors];
+            }
 
             $t += 60 * 60;
         }

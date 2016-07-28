@@ -1,0 +1,22 @@
+<link rel="import" href="../../dist/components/moment.html">
+<link rel="import" href="../../bower_components/google-chart/google-chart.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="log-statistic">
+    <template>
+        <style>
+            :host { }
+        </style>
+        <iron-ajax auto handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+        <google-chart id="chart" type="line"
+                      options='{
+                            "backgroundColor":"transparent",
+                            "colors":["#00bfa5", "#ffd600", "#d50000"],
+                            "legend": {"position": "top", "textStyle":{"color": "#fff"}},
+                            "chartArea": {"width": "100%"},
+                            "hAxis": {"textStyle":{"color": "#fff"}},
+                            "vAxis": {"textPosition": "in", "textStyle":{"color": "#fff"}}
+                          }'></google-chart>
+    </template>
+    <script src="../../dist/js-modules/log-statistic.module.js"></script>
+</dom-module>
