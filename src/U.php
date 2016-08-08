@@ -12,36 +12,31 @@ class U
     {
         $pdo = new \PDO('sqlite:' . $pathToDb);
 
-        $lastLogTime = $pdo->prepare('SELECT updated FROM source WHERE path = :pathToDb');
-        $lastLogTime->execute([':pathToDb' => $pathToDb]);
-        $lastLogTime = $lastLogTime->fetch()[0];
+        $lastLogTime = $pdo->prepare('SELECT updated FROM source WHERE path = :pathToLog');
+        $lastLogTime->execute([':pathToLog' => $pathToLog]);
+        $lastLogTime = strtotime($lastLogTime->fetchColumn());
 
         $parser = new Parser(trim($pathToLog), $timezone);
 
-        $pathStmt = $pdo->prepare("INSERT INTO source (path) VALUES (:path)");
-        $updStmt = $pdo->prepare("UPDATE source SET updated = :updated, timezone = :timezone WHERE path = :path");
-        $pathStmt->bindParam(':path', $pathToLog);
-        $updStmt->bindParam(':path', $pathToLog);
-        $updStmt->bindParam(':updated', date('c', $parser->lastModified));
-        $updStmt->bindParam(':timezone', $timezone);
-
         if ($parser->isUpdated($lastLogTime)) {
             $stmt = $pdo->prepare("INSERT INTO data (logdate, level, message) VALUES (:logdate, :level, :message)");
-            $stmt->bindParam(':logdate', $logDate);
-            $stmt->bindParam(':level', $level);
-            $stmt->bindParam(':message', $message);
             foreach ($parser->parse() as $row) {
-                if ($row['logTime'] > strtotime('-3 days')) {
-                    $logDate = date('c', $row['logTime']);
-                    $level = $row['level'];
-                    $message = mb_convert_encoding($row['message'], 'utf-8');
-                    $stmt->execute();
+                if ($row['logTime'] > $lastLogTime) {
+                    $stmt->execute([
+                        ':logdate' => date('c', $row['logTime']),
+                        ':level' => $row['level'],
+                        ':message' => mb_convert_encoding($row['message'], 'utf-8')
+                    ]);
                 }
             }
             U::deleteOldRows($pathToDb);
         }
-        $pathStmt->execute();
-        $updStmt->execute();
+
+        $pathStmt = $pdo->prepare("INSERT INTO source (path) VALUES (:path)");
+        $pathStmt->execute([':path' => $pathToLog]);
+
+        $updStmt = $pdo->prepare("UPDATE source SET updated = :updated, timezone = :timezone WHERE path = :path");
+        $updStmt->execute([':path' => $pathToLog, ':updated' => date('c', $parser->lastModified), ':timezone' => $timezone]);
     }
 
     private static function deleteOldRows($pathToDb)
