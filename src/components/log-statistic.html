@@ -5,17 +5,24 @@
 <dom-module id="log-statistic">
     <template>
         <style>
-            :host { }
+            :host { display: block; position: relative; }
+
+            .update-mark { position: absolute; right: 15px; top: 25px; font-size: 80%; }
         </style>
-        <iron-ajax auto handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
-        <google-chart id="chart" type="line"
+        <iron-ajax auto handle-as="json" on-response="handleResponse" on-error="timeout"
+                   debounce-duration="300"></iron-ajax>
+        <span class="update-mark">{{uMark}}</span>
+        <google-chart id="chart" type="stepped-area"
                       options='{
-                            "backgroundColor":"transparent",
-                            "colors":["#00bfa5", "#ffd600", "#d50000"],
-                            "legend": {"position": "top", "textStyle":{"color": "#fff"}},
+                            "areaOpacity": 0.5,
+                            "backgroundColor": "transparent",
+                            "colors": ["#d50000", "#ffd600", "#00bfa5"],
+                            "legend": {"position": "top", "textStyle": {"color": "#fff"}},
                             "chartArea": {"width": "100%"},
-                            "hAxis": {"textStyle":{"color": "#fff"}},
-                            "vAxis": {"textPosition": "in", "textStyle":{"color": "#fff"}}
+                            "hAxis": {"textStyle": {"color": "#fff"}},
+                            "vAxis": {"format": "#", "textPosition": "in", "textStyle": {"color": "#fff"}},
+                            "isStacked": "true",
+                            "connectSteps": "false"
                           }'></google-chart>
     </template>
     <script src="../../dist/js-modules/log-statistic.module.js"></script>
