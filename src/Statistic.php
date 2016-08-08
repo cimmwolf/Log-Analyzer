@@ -5,25 +5,14 @@ namespace DenisBeliaev\logAnalyzer;
 /**
  * @author Denis Beliaev <cimmwolf@gmail.com>
  */
-class Statistic
+class Statistic extends DbLog
 {
-    protected $pdo;
-
-    /**
-     * Statistic constructor.
-     * @param $dbPath string Source database path
-     */
-    public function __construct($dbPath)
-    {
-        $this->pdo = new \PDO('sqlite:' . $dbPath);
-    }
-
     /** Return statistic data grouped by hours.
      * @return array Format: [[Label1, .., LabelN], [Value1, .., ValueN], ..]
      */
     public function getHourlyData()
     {
-        $output = [['Date', 'Info', 'Warnings', 'Errors']];
+        $output = [['Date', 'Errors', 'Warnings', 'Info']];
         $stmt = $this->pdo->prepare("
           SELECT level, COUNT(*) FROM data 
           WHERE strftime('%s', logdate) >= :start AND strftime('%s', logdate) <= :end
@@ -48,7 +37,7 @@ class Statistic
                 $logTimestamp = $t + 60 * 60;
                 if ($logTimestamp > time())
                     $logTimestamp = time();
-                $output[] = [$logTimestamp, $info, $warnings, $errors];
+                $output[] = [$logTimestamp, $errors, $warnings, $info];
             }
 
             $t += 60 * 60;

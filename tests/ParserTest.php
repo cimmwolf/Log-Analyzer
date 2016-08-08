@@ -36,19 +36,12 @@ class YiiLogParserTest extends PHPUnit_Framework_TestCase
     /**
      * @covers \DenisBeliaev\logAnalyzer\Parser::isUpdated
      */
-    public function testForNotUpdated()
+    public function testUpdatedWeather()
     {
         $log = new Parser(__DIR__ . '/test.yii.log');
         $this->assertEquals(false, $log->isUpdated(time()));
-    }
-
-    /**
-     * @covers \DenisBeliaev\logAnalyzer\Parser::isUpdated
-     */
-    public function testForUpdated()
-    {
-        $log = new Parser(__DIR__ . '/test.yii.log');
         $this->assertEquals(true, $log->isUpdated(1));
+        $this->assertEquals(1437941295, $log->lastModified);
     }
 
     /**
