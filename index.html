@@ -17,6 +17,7 @@
     <script src="dist/js/angular-init.js"></script>
 
     <link rel="import" href="/dist/components/log-statistic.html">
+    <link rel="import" href="/dist/components/log-flow.html">
 </head>
 <body ng-controller="logsCtrl" class="main-background">
 <div class="container-fluid">
@@ -26,20 +27,8 @@
                 {{log.name}}
                 <small>{{log.error}}</small>
             </h1>
-            <log-statistic ng-attr-data="{{log.chartData}}"></log-statistic>
-            <div class="form-group">
-                <input ng-model="query" class="form-control" placeholder="Искать:">
-            </div>
-            <div class="log-container">
-                <table class="table table-condensed">
-                    <tr ng-repeat="row in log.data | filter:query">
-                        <td class="text-center">{{row.logdate | date:'HH:mm:ss dd.MM'}}</td>
-                        <td>{{row.level}}</td>
-                        <td ng-bind-html="row.message | pathCut" style="word-break: break-all"></td>
-                        <td>{{row.count}}</td>
-                    </tr>
-                </table>
-            </div>
+            <log-statistic ng-attr-data="{{log.chartDataSource}}"></log-statistic>
+            <log-flow ng-attr-source="{{log.dataSource}}"></log-flow>
         </div>
     </div>
 </div>

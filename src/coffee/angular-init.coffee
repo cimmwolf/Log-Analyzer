@@ -22,7 +22,8 @@ logsApp = angular.module('logsApp', ['ngSanitize'])
 logsApp.controller 'logsCtrl', ($scope, $http) ->
   $http.get('get-data.php').success (data) ->
     for log in data
-      log.chartData = '/statistic.php?source=' + log.name
+      log.chartDataSource = '/statistic.php?source=' + log.name
+      log.dataSource = '/data.php?source=' + log.name
 
     $scope.logs = data
     return

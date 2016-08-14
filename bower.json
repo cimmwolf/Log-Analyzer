@@ -17,6 +17,7 @@
   "dependencies": {
     "google-chart": "GoogleWebComponents/google-chart#^1.0.6",
     "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
-    "moment": "^2.14.1"
+    "moment": "^2.14.1",
+    "paper-input": "PolymerElements/paper-input#^1.1.17"
   }
 }

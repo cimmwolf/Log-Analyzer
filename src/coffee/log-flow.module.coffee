@@ -1,46 +1,28 @@
 Polymer
-  is: 'log-statistic'
-
+  is: 'log-flow'
   properties:
-    data:
+    data: Array
+    source:
       type: String
-      observer: 'dataChanged'
-    lastUpdate: Number
-    uMark:
-      type: String
-      computed: 'computeUMark(lastUpdate)'
-
-  ready: ->
-    setInterval =>
-      if @lastUpdate?
-        @lastUpdate++
-    , 50000
-
-  dataChanged: (value)->
-    if value?
-      @$$('iron-ajax').url = value
+      observer: 'sourceChanged'
 
   handleResponse: ->
     data = @$$('iron-ajax').lastResponse
-    for row,i in data
-      if i > 0
-        row[0] = new Date(row[0] * 1000)
+    for row in data
+      row.logdate = @smartDate(row.logdate * 1000)
 
-    @$$('google-chart').data = data
-
+    @data = data
     @lastUpdate = Date.now()
     @timeout()
+
+  sourceChanged: (value)->
+    if value?
+      @$$('iron-ajax').url = value
 
   timeout: ->
     setTimeout =>
       @$$('iron-ajax').generateRequest()
     , 60000
-
-  computeUMark: (lastUpdate)->
-    if (Date.now() - lastUpdate) > 60 * 4 * 1000
-      @smartDate(lastUpdate)
-    else
-      return ''
 
   smartDate: (timestamp) ->
     diff = Date.now() - timestamp
@@ -73,3 +55,12 @@ Polymer
       return 'yesterday at ' + timestamp.format('HH:mm')
 
     return timestamp.format('D MMM, HH:mm')
+
+  computeFilter: (string) ->
+    if !string
+      null
+    else
+      string = string.toLowerCase()
+      return (row)->
+        message = row.message.toLowerCase();
+        message.indexOf(string) != -1
