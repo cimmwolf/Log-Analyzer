@@ -2,9 +2,9 @@ Polymer
   is: 'log-statistic'
 
   properties:
-    data:
+    source:
       type: String
-      observer: 'dataChanged'
+      observer: 'sourceChanged'
     lastUpdate: Number
     uMark:
       type: String
@@ -16,7 +16,7 @@ Polymer
         @lastUpdate++
     , 50000
 
-  dataChanged: (value)->
+  sourceChanged: (value)->
     if value?
       @$$('iron-ajax').url = value
 
