@@ -16,6 +16,7 @@ class U
         $lastLogTime->execute([':pathToLog' => $pathToLog]);
         $lastLogTime = strtotime($lastLogTime->fetchColumn());
 
+        $pdo->query('UPDATE source SET last_request = :now')->execute([':now' => date('c')]);
         $parser = new Parser(trim($pathToLog), $timezone);
 
         if ($parser->isUpdated($lastLogTime)) {
