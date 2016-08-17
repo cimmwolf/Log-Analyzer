@@ -11,5 +11,5 @@ if (!isset($_GET['source']) OR !file_exists(__DIR__ . '/store/' . $_GET['source'
 }
 
 $Statistic = new \DenisBeliaev\logAnalyzer\Statistic($pathToDb);
-header('Content-Type: application/json');
-echo json_encode($Statistic->getHourlyData(), JSON_NUMERIC_CHECK);
+
+\DenisBeliaev\logAnalyzer\U::jsonOut($Statistic->getHourlyData(), JSON_NUMERIC_CHECK);

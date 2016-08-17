@@ -10,10 +10,8 @@ if (!isset($_GET['source']) OR !file_exists(__DIR__ . '/store/' . $_GET['source'
     exit;
 }
 
-$pdo = new PDO('sqlite:' . $pathToDb);
-new \DenisBeliaev\logAnalyzer\Migration($pdo);
+$pdo = \DenisBeliaev\logAnalyzer\U::getPdo($pathToDb);
 $data = $pdo->query('SELECT strftime(\'%s\', logdate) AS logdate, level, message, COUNT(logdate) AS count FROM data GROUP BY message ORDER BY logdate DESC')->fetchAll(PDO::FETCH_ASSOC);
 $output = $data;
 
-header('Content-Type: application/json');
-echo json_encode($output, JSON_NUMERIC_CHECK);
+\DenisBeliaev\logAnalyzer\U::jsonOut($output, JSON_NUMERIC_CHECK);

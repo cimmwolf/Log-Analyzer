@@ -45,11 +45,23 @@ class U
         $pdo->query("DELETE FROM data WHERE datetime(logdate, 'localtime') < datetime('now', '-7 days', '-1 hours')");
     }
 
-    public static function jsonOut($data) {
+    public static function jsonOut($data, $options = 0)
+    {
         header('Content-Type: application/json');
-        $json = json_encode($data);
+        $json = json_encode($data, $options);
         if ($json === false)
             $json = ['error' => json_last_error_msg()];
         echo $json;
+    }
+
+    /**
+     * @param $pathToDb
+     * @return \PDO
+     */
+    public static function getPdo($pathToDb)
+    {
+        $pdo = new \PDO('sqlite:' . $pathToDb);
+        new Migration($pdo);
+        return $pdo;
     }
 }

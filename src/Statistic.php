@@ -30,7 +30,7 @@ class Statistic extends DbLog
                     $info = $row[1];
                 if ($row['level'] == 'warn')
                     $warnings = $row[1];
-                if ($row['level'] == 'error')
+                if ($row['level'] == 'error' OR $row['level'] == 'crit')
                     $errors = $row[1];
             }
             if (count($output) > 1 OR ($info + $warnings + $errors) > 0) {

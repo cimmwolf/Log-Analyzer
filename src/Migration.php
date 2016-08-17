@@ -19,6 +19,10 @@ class Migration
         $stmt = $pdo->query("SELECT COUNT(*) FROM data WHERE message LIKE '%client:%' OR message LIKE '% *%' OR message LIKE '%temporary file /%' OR level = 'warning'");
         if ($stmt->fetchColumn() > 0)
             $this->migrationV010("SELECT logdate, message, level FROM data WHERE message LIKE '%client:%' OR message LIKE '%*%' OR message LIKE '%temporary file /%' OR level = 'warning'");
+
+        $stmt = $pdo->query('PRAGMA table_info(source)');
+        if ($stmt->fetchAll()[3]['name'] != 'last_request')
+            $this->migrationV020();
     }
 
     /**
@@ -33,5 +37,11 @@ class Migration
             $message = preg_replace('~(.*? to a temporary file) [a-zA-Z0-9_/]+( .*)~', '$1$2', $message);
             $stmt->execute([':logdate' => $row[0], ':before' => $row[1], ':after' => $message, ':level' => str_replace('warning', 'warn', $row[2])]);
         }
+    }
+
+    private function migrationV020()
+    {
+        $stmt = $this->pdo->query('ALTER TABLE source ADD COLUMN last_request INT');
+        $stmt->execute();
     }
 }

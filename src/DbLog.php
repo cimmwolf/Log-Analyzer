@@ -16,5 +16,6 @@ class DbLog
     public function __construct($dbPath)
     {
         $this->pdo = new \PDO('sqlite:' . $dbPath);
+        new Migration($this->pdo);
     }
 }
