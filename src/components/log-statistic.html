@@ -9,8 +9,7 @@
 
             .update-mark { position: absolute; right: 15px; top: 25px; font-size: 80%; }
         </style>
-        <iron-ajax auto handle-as="json" on-response="handleResponse" on-error="timeout"
-                   debounce-duration="300"></iron-ajax>
+        <iron-ajax auto handle-as="json" on-response="handleResponse"></iron-ajax>
         <span class="update-mark">{{uMark}}</span>
         <google-chart id="chart" type="stepped-area"
                       options='{

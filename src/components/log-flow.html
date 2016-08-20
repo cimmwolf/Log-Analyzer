@@ -13,8 +13,7 @@
 
             .table td { border: none }
         </style>
-        <iron-ajax auto handle-as="json" on-response="handleResponse" on-error="timeout"
-                   debounce-duration="300"></iron-ajax>
+        <iron-ajax auto handle-as="json" on-response="handleResponse"></iron-ajax>
         <paper-input label="Search" value="{{searchString::input}}"></paper-input>
         <div class="wrapper">
             <table class="table table-condensed">
