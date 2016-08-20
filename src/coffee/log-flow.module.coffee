@@ -13,16 +13,13 @@ Polymer
 
     @data = data
     @lastUpdate = Date.now()
-    @timeout()
 
   sourceChanged: (value)->
     if value?
       @$$('iron-ajax').url = value
 
-  timeout: ->
-    setTimeout =>
-      @$$('iron-ajax').generateRequest()
-    , 60000
+  update: ->
+    @$$('iron-ajax').generateRequest()
 
   smartDate: (timestamp) ->
     diff = Date.now() - timestamp

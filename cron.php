@@ -10,6 +10,6 @@ foreach (glob(__DIR__ . "/store/*.sqlite3") as $pathToDb) {
     $logs = $pdo->query('SELECT path, timezone, last_request FROM source')->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($logs as $log)
-        if ((time() - strtotime($log['last_request'])) > 60 * 2)
+        if ((time() - strtotime($log['last_request'])) > 59)
             U::saveLog($pathToDb, $log['path'], $log['timezone']);
 }

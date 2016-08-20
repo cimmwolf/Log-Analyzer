@@ -11,11 +11,6 @@ if (!isset($_GET['source']) OR !file_exists(__DIR__ . '/store/' . $_GET['source'
 }
 
 $pdo = \DenisBeliaev\logAnalyzer\U::getPdo($pathToDb);
-$logs = $pdo->query('SELECT path, timezone, last_request FROM source')->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($logs as $log)
-    if ((time() - strtotime($log['last_request'])) > 60 * 2)
-        \DenisBeliaev\logAnalyzer\U::saveLog($pathToDb, $log['path'], $log['timezone']);
 
 $data = $pdo->query('SELECT strftime(\'%s\', logdate) AS logdate, level, message, COUNT(logdate) AS count FROM data GROUP BY message ORDER BY logdate DESC')->fetchAll(PDO::FETCH_ASSOC);
 $output = $data;

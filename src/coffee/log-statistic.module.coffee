@@ -29,12 +29,9 @@ Polymer
     @$$('google-chart').data = data
 
     @lastUpdate = Date.now()
-    @timeout()
 
-  timeout: ->
-    setTimeout =>
-      @$$('iron-ajax').generateRequest()
-    , 60000
+  update: ->
+    @$$('iron-ajax').generateRequest()
 
   computeUMark: (lastUpdate)->
     if (Date.now() - lastUpdate) > 60 * 4 * 1000

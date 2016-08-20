@@ -7,7 +7,8 @@
         <style>
             :host { }
         </style>
-        <iron-ajax auto url="/logs.php" handle-as="json" on-response="handleResponse"></iron-ajax>
+        <iron-ajax url="/cron.php" id="cronRequest" method="post" on-response="cronComplete"></iron-ajax>
+        <iron-ajax auto url="/logs.php" handle-as="json" on-response="handleResponse" id="logsRequest"></iron-ajax>
         <div class="container-fluid">
             <div class="row">
                 <template is="dom-repeat" items="{{logs}}">
