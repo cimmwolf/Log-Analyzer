@@ -16,7 +16,7 @@ class StatisticTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(25, $data);
         foreach ($data as $key => $row) {
             if ($key == 0)
-                $this->assertTrue($row === ['Date', 'Info', 'Warnings', 'Errors']);
+                $this->assertTrue($row === ['Date', 'Errors', 'Warnings', 'Info']);
             else
                 $this->assertTrue($row == [$row[0], 1, 1, 1]);
         }

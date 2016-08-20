@@ -38,7 +38,9 @@ class YiiLogParserTest extends PHPUnit_Framework_TestCase
      */
     public function testUpdatedWeather()
     {
-        $log = new Parser(__DIR__ . '/test.yii.log');
+        $filePath = __DIR__ . '/test.yii.log';
+        touch($filePath, 1437941295);
+        $log = new Parser($filePath);
         $this->assertEquals(false, $log->isUpdated(time()));
         $this->assertEquals(true, $log->isUpdated(1));
         $this->assertEquals(1437941295, $log->lastModified);
