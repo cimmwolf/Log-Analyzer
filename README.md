@@ -24,6 +24,12 @@ Get started
 
 3. open index.html from browser.
 
+Cron job
+--------
+When this app is opened in browser, the script updates data every minute. When you are offline cron can 
+update log's data. In this case you should send request to file /cron.php. 
+Example: wget -O /dev/null -o /dev/null (app.webroot.path)/cron.php
+
 Быстрый старт:
 -------------
 1. скачайте проект в директорию доступную из сети;
@@ -39,3 +45,8 @@ Get started
                  логи Nginx и Yii могут использовать разные часовые пояса.
 
 3. откройте файл index.html в браузере.
+
+Обновление данных по расписанию
+-------------------------------
+Пока приложение открыто в браузере оно будет обновлять данные каждую минуту. Также, вы можете настроить cron для 
+автоматического обновления данных. Пример: wget -O /dev/null -o /dev/null (app.webroot.path)/cron.php
