@@ -17,7 +17,13 @@ class U
         $lastLogTime = strtotime($lastLogTime->fetchColumn());
 
         $pdo->query('UPDATE source SET last_request = :now')->execute([':now' => date('c')]);
-        $parser = new Parser(trim($pathToLog), $timezone);
+
+        try {
+            $parser = new Parser(trim($pathToLog), $timezone);
+        } catch (\RuntimeException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
 
         if ($parser->isUpdated($lastLogTime)) {
             $stmt = $pdo->prepare("INSERT INTO data (logdate, level, message) VALUES (:logdate, :level, :message)");
@@ -38,6 +44,7 @@ class U
 
         $updStmt = $pdo->prepare("UPDATE source SET updated = :updated, timezone = :timezone WHERE path = :path");
         $updStmt->execute([':path' => $pathToLog, ':updated' => date('c', $parser->lastModified), ':timezone' => $timezone]);
+        return true;
     }
 
     private static function deleteOldRows($pathToDb)

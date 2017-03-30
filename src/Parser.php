@@ -7,12 +7,13 @@ namespace DenisBeliaev\logAnalyzer;
 
 class Parser
 {
-    protected $filename;
     public $lastModified;
+    protected $filename;
 
     /**
      * @param string $filename
      * @param $timezone
+     * @throws \RuntimeException
      */
     public function __construct($filename, $timezone = 'UTC')
     {
@@ -61,16 +62,20 @@ class Parser
         if (empty($log))
             return [];
 
-        $patterns = [
-            '~^[0-9/]{10}\s[0-9:]{8}\s\[.*?\]\s\[.*?\]\s.*$~',
-            '~^[0-9/]{10}\s[0-9:]{8}\s\[.*?\]\s[0-9#]+?:\s.*?client:.*?request:.*?host:.*$~',
-        ];
-        $replacements = [
-            '\DenisBeliaev\logAnalyzer\YiiLogParser',
-            '\DenisBeliaev\logAnalyzer\NginxLogParser',
-        ];
-        $parserClass = preg_replace($patterns, $replacements, $log[0], 1);
-        if($parserClass == $log[0])
+        foreach ($log as $row) {
+            $patterns = [
+                '~^[0-9/]{10}\s[0-9:]{8}\s\[.*?\]\s\[.*?\]\s.*$~',
+                '~^[0-9/]{10}\s[0-9:]{8}\s\[.*?\]\s[0-9#]+?:\s.*?client:.*?request:.*?host:.*$~',
+            ];
+            $replacements = [
+                '\DenisBeliaev\logAnalyzer\YiiLogParser',
+                '\DenisBeliaev\logAnalyzer\NginxLogParser',
+            ];
+            $parserClass = preg_replace($patterns, $replacements, $row, 1);
+            if (in_array($parserClass, $replacements))
+                break;
+        }
+        if (!isset($parserClass))
             throw new \UnexpectedValueException('Unknown log type!');
 
         return $parserClass::parse($log);
