@@ -5,79 +5,115 @@
 
 namespace DenisBeliaev\logAnalyzer;
 
+/**
+ * Class Parser
+ * @package DenisBeliaev\logAnalyzer
+ *
+ * @property string $date
+ * @property string $message
+ * @property string $messageType
+ */
 class Parser
 {
     public $lastModified;
-    protected $filename;
+    protected $string;
+    protected $date;
+    protected $message;
+    protected $messageType;
 
     /**
-     * @param string $filename
-     * @param $timezone
-     * @throws \RuntimeException
+     * @param $string
      */
-    public function __construct($filename, $timezone = 'UTC')
+    public function __construct($string)
     {
-        date_default_timezone_set($timezone);
-
-        if (filter_var($filename, FILTER_VALIDATE_URL) !== FALSE) {
-            $file_headers = @get_headers($filename, 1);
-            if (strpos(array_values($file_headers)[0], '200 OK') === false)
-                throw new \RuntimeException("$filename does not exist!");
-            if (isset($file_headers['Last-Modified']))
-                $mtime = $file_headers['Last-Modified'];
-            elseif (isset($file_headers['X-Last-Modified']))
-                $mtime = $file_headers['X-Last-Modified'];
-            if (isset($mtime))
-                $this->lastModified = strtotime($mtime);
-        } else {
-            if (!file_exists($filename))
-                throw new \RuntimeException("$filename does not exist!");
-            $this->lastModified = filemtime($filename);
-        }
-
-        $this->filename = $filename;
+        $this->string = $string;
     }
 
-    /**
-     * @param int $timestamp
-     * @return bool
-     */
-    public function isUpdated($timestamp)
+    public function __get($name)
     {
-        if (!is_int($timestamp)) {
-            if ((is_numeric($timestamp) AND !is_float($timestamp)) OR is_bool($timestamp) OR is_null($timestamp))
-                $timestamp = intval($timestamp);
+        switch ($name) {
+            default:
+                $getter = 'get' . $name;
+                if (method_exists($this, $getter))
+                    return $this->$getter();
+                else
+                    return $this->{$name};
+        }
+    }
+
+    public function getMessageType()
+    {
+        if (empty($this->messageType)) {
+            $this->getMessage();
+            $string = str_replace($this->message, '', $this->string);
+            $matches = [];
+            if (preg_match('/\[(error|info|warn(ing)?)\]/', $string, $matches)) {
+                $this->messageType = str_replace('warning', 'warn', $matches[1]);
+            } else
+                $this->messageType = '?';
+        }
+        return $this->messageType;
+    }
+
+    public function getMessage()
+    {
+        if (empty($this->message)) {
+            $date = $this->getDate();
+            $matches = [];
+            $datePattern = preg_quote($date);
+            if (preg_match("~$datePattern.*\] (.*?)(,|$)~", $this->string, $matches))
+                $this->message = $matches[1];
             else
-                throw new \InvalidArgumentException('$timestamp parameter must be integer!');
+                $this->message = false;
         }
-
-        if ($this->lastModified > $timestamp)
-            return true;
-        return false;
+        return $this->message;
     }
 
-    public function parse()
+    public function getDate()
     {
-        $log = file($this->filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        if (empty($log))
-            return [];
-
-        foreach ($log as $row) {
-            $patterns = [
-                '~^[0-9/]{10}\s[0-9:]{8}\s\[.*?\]\s\[.*?\]\s.*$~',
-                '~^[0-9/]{10}\s[0-9:]{8}\s\[.*?\]\s[0-9#]+?:\s.*?client:.*?request:.*?host:.*$~',
-            ];
-            $replacements = [
-                '\DenisBeliaev\logAnalyzer\YiiLogParser',
-                '\DenisBeliaev\logAnalyzer\NginxLogParser',
-            ];
-            $parserClass = preg_replace($patterns, $replacements, $row, 1);
-            if (in_array($parserClass, $replacements))
-                break;
+        if (empty($this->date)) {
+            $matches = [];
+            if (preg_match('/\d{4}\/\d\d\/\d\d \d\d:\d\d:\d\d/', $this->string, $matches))
+                $this->date = $matches[0];
+            else
+                $this->date = false;
         }
-        if (!isset($parserClass))
-            throw new \UnexpectedValueException('Unknown log type!');
+        return $this->date;
+    }
 
-        return $parserClass::parse($log);
+    public function filterMessage($message)
+    {
+        $message = preg_replace(
+            [
+                '/\d+#\d+: (\*\d+ (FastCGI sent in stderr: )?)?/',
+                '/PHP message: (PHP .*?:\s+)?/',
+                '/in .*?( on line |:)\d+/',
+                '/exception .*? with message /',
+                '/PID=\d+/'
+            ],
+            '',
+            $message
+        );
+
+        $message = preg_replace(
+            '/cache entry [a-z0-9]+/',
+            'cache entry',
+            $message
+        );
+
+        $message = preg_replace(
+            '~to a temporary file [a-zA-Z0-9_/]+~',
+            'to a temporary file',
+            $message
+        );
+
+        $message = str_replace(
+            [
+                ' while reading response header from upstream',
+                ' while reading upstream'
+            ], '', $message);
+
+        $message = trim($message, " \t\n\r\0\x0B:\"'");
+        return $message;
     }
 }
