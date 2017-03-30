@@ -24,5 +24,56 @@
                             "connectSteps": "false"
                           }'></google-chart>
     </template>
-    <script src="../../dist/js-modules/log-statistic.module.js"></script>
+    <script>
+        Polymer({
+            is: 'log-statistic',
+            properties: {
+                source: {
+                    type: String,
+                    observer: 'sourceChanged'
+                },
+                lastUpdate: Number,
+                uMark: {
+                    type: String,
+                    computed: 'computeUMark(lastUpdate)'
+                }
+            },
+            ready: function() {
+                return setInterval((function(_this) {
+                    return function() {
+                        if (_this.lastUpdate != null) {
+                            return _this.lastUpdate++;
+                        }
+                    };
+                })(this), 50000);
+            },
+            sourceChanged: function(value) {
+                if (value != null) {
+                    return this.$$('iron-ajax').url = value;
+                }
+            },
+            handleResponse: function() {
+                var data, i, j, len, row;
+                data = this.$$('iron-ajax').lastResponse;
+                for (i = j = 0, len = data.length; j < len; i = ++j) {
+                    row = data[i];
+                    if (i > 0) {
+                        row[0] = new Date(row[0] * 1000);
+                    }
+                }
+                this.$$('google-chart').data = data;
+                return this.lastUpdate = Date.now();
+            },
+            update: function() {
+                return this.$$('iron-ajax').generateRequest();
+            },
+            computeUMark: function(lastUpdate) {
+                if ((Date.now() - lastUpdate) > 60 * 4 * 1000) {
+                    return this.domHost.smartDate(lastUpdate);
+                } else {
+                    return '';
+                }
+            }
+        });
+    </script>
 </dom-module>
