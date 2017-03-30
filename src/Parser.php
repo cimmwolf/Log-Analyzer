@@ -12,6 +12,7 @@ namespace DenisBeliaev\logAnalyzer;
  * @property string $date
  * @property string $message
  * @property string $messageType
+ * @property string $string
  */
 class Parser
 {

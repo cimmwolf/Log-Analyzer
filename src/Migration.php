@@ -23,6 +23,9 @@ class Migration
         $stmt = $pdo->query('PRAGMA table_info(source)');
         if ($stmt->fetchAll()[3]['name'] != 'last_request')
             $this->migrationV020();
+
+        if ($this->pdo->query('SELECT raw FROM data') === false)
+            $this->migrationV030();
     }
 
     /**
@@ -42,6 +45,12 @@ class Migration
     private function migrationV020()
     {
         $stmt = $this->pdo->query('ALTER TABLE source ADD COLUMN last_request INT');
+        $stmt->execute();
+    }
+
+    private function migrationV030()
+    {
+        $stmt = $this->pdo->query("ALTER TABLE data ADD COLUMN raw TEXT DEFAULT '' NULL");
         $stmt->execute();
     }
 }

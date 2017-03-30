@@ -49,7 +49,7 @@ class U
         }
 
         if (isset($lastModified) && $lastModified > $lastLogTime) {
-            $stmt = $pdo->prepare("INSERT INTO data (logdate, level, message) VALUES (:logdate, :level, :message)");
+            $stmt = $pdo->prepare("INSERT INTO data (logdate, level, message, raw) VALUES (:logdate, :level, :message, :raw)");
 
             $log = file($filename, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             if (empty($log))
@@ -68,7 +68,8 @@ class U
                                 $stmt->execute([
                                     ':logdate' => date('c', strtotime($date)),
                                     ':level' => $parser->messageType,
-                                    ':message' => mb_convert_encoding($message, 'utf-8')
+                                    ':message' => mb_convert_encoding($message, 'utf-8'),
+                                    ':raw' => $parser->string
                                 ]);
                             }
                         }
