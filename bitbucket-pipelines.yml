@@ -12,7 +12,7 @@ pipelines:
             - RemoteMachine="deploy@logs.vistro.ru"
             - ReleasePath="${BasePath}/releases/$(date '+%Y%m%d%H%M%S')"
             - yarn run publish
-            - rsync -rlzv --delete --exclude-from=deploy_exclude.txt --link-dest=${BasePath}/current ./ ${RemoteMachine}:${ReleasePath}
+            - rsync -rlzvc --delete --exclude-from=deploy_exclude.txt --link-dest=${BasePath}/current ./ ${RemoteMachine}:${ReleasePath}
             - ssh $RemoteMachine "ln -vfn -s $ReleasePath ${BasePath}/current"
             - ssh $RemoteMachine "mv -f ${ReleasePath}/store/* ${SharedPath}/store/ && rm -r ${ReleasePath}/store"
             - ssh $RemoteMachine "ln -s ${SharedPath}/store/ ${ReleasePath}/store"
