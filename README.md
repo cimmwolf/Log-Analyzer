@@ -2,22 +2,19 @@ Log Analyzer
 ============
 Requirements
 ------------
-* PHP (with sqlite3) >= 5.6;
+* PHP (with sqlite3) >= 7;
 * Composer;
-* NPM;
+* Yarn;
 * Bower;
 * Gulp.
 
 Get started
 -----------
 1. download project into web accessible directory on the server;
-2. run `composer install`;
-3. run `npm install`;
-4. run `bower install`;
-4. run `gulp`;
-2. run `php fill-db.php -s LOG_SOURCE -n PROJECT_NAME -t TIMEZONE`  
+2. run `yarn run publish`;
+2. run `la add PROJECT_NAME LOG_SOURCE [TIMEZONE]`  
    where:  
-   `LOG_SOURCE` — comma separated paths to log files. It's may be urls. Analyzer recognize format automatically.  
+   `LOG_SOURCE` — path to log file. It's may be url. Analyzer recognize format automatically.  
    `PROJECT_NAME` — name of your project.  
    `TIMEZONE` — logs dates timezone. List of values: http://php.net/manual/ru/timezones.php. Be careful, Nginx and Yii 
                  logs can use different timezones.
@@ -33,13 +30,10 @@ Example: wget -O /dev/null -o /dev/null (app.webroot.path)/cron.php
 Быстрый старт:
 -------------
 1. скачайте проект в директорию доступную из сети;
-2. запустите команду `composer install`;
-3. запустите команду `npm install`;
-4. запустите команду `bower install`;
-4. запустите команду `gulp`;
-2. запустите команду: `php fill-db.php -s LOG_SOURCE -n PROJECT_NAME -t TIMEZONE`  
+2. запустите команду `yarn run publish`;
+2. запустите команду: `la add PROJECT_NAME LOG_SOURCE [TIMEZONE]`  
    где:  
-   `LOG_SOURCE` — пути до логов, разделённые запятыми. Пути могут быть URL. Анализатор самостоятельно определит тип логов.  
+   `LOG_SOURCE` — путь до лога. Путь может быть URL. Анализатор самостоятельно определит тип лога.  
    `PROJECT_NAME` — название вашего проекта.  
    `TIMEZONE` — временная зона для анализа даты в логах. Список значений: http://php.net/manual/ru/timezones.php. Внимание,
                  логи Nginx и Yii могут использовать разные часовые пояса.

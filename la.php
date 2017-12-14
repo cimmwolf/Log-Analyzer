@@ -37,10 +37,10 @@ $app->command('remove log_name [source]', function ($log_name, $source, InputInt
     try {
         $Log = new Log($log_name);
         if (empty($source)) {
-            if ($helper->ask($input, $output, new ConfirmationQuestion("Delete $log_name? [y/N] ", false)))
+            if ($helper->ask($input, $output, new ConfirmationQuestion("Delete $log_name? Y/n ")))
                 unlink($Log->dbPath);
         } else {
-            if ($helper->ask($input, $output, new ConfirmationQuestion("Delete source $source from $log_name? [y/N] ", false)))
+            if ($helper->ask($input, $output, new ConfirmationQuestion("Delete source $source from $log_name? Y/n ")))
                 $Log->removeSource($source);
         }
     } catch (Exception $e) {
