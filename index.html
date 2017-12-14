@@ -5,13 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="dist/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/style.css">
 
-    <title>Логи</title>
+    <title>Logs Analyzer</title>
 
-    <script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script>
+        (function () {
+            if ('registerElement' in document
+                && 'import' in document.createElement('link')
+                && 'content' in document.createElement('template')) {
+                // platform is good!
+            } else
+                document.write('<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>');
+        })();
+    </script>
 
-    <link rel="import" href="/dist/components/log-app.html">
+    <link rel="import" href="/components/log-app.html">
 </head>
 <body class="main-background">
 

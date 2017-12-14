@@ -1,0 +1,77 @@
+<link rel="import" href="moment.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="log-flow-message.html">
+<link rel="import" href="/bower_components/paper-input/paper-input.html">
+
+
+<dom-module id="log-flow">
+    <template>
+        <style>
+            :host { display: block; }
+
+            .wrapper { height: 200px; overflow: auto; }
+
+            .table td { border: none }
+        </style>
+        <iron-ajax auto handle-as="json" on-response="handleResponse"></iron-ajax>
+        <paper-input label="Search" value="{{searchString::input}}"></paper-input>
+        <div class="wrapper">
+            <table class="table table-condensed">
+                <tbody>
+                <template is="dom-repeat" items="{{data}}" filter="{{computeFilter(searchString)}}">
+                    <tr>
+                        <td class="text-center">{{item.logdate}}</td>
+                        <td>{{item.level}}</td>
+                        <td>
+                            <log-flow-message message="{{item.message}}"></log-flow-message>
+                        </td>
+                        <td>{{item.count}}</td>
+                    </tr>
+                </template>
+                </tbody>
+            </table>
+        </div>
+    </template>
+    <script>
+        Polymer({
+            is: 'log-flow',
+            properties: {
+                data: Array,
+                source: {
+                    type: String,
+                    observer: 'sourceChanged'
+                }
+            },
+            handleResponse: function () {
+                var data, i, len, row;
+                data = this.$$('iron-ajax').lastResponse;
+                for (i = 0, len = data.length; i < len; i++) {
+                    row = data[i];
+                    row.logdate = this.domHost.smartDate(row.logdate * 1000);
+                }
+                this.data = data;
+                return this.lastUpdate = Date.now();
+            },
+            sourceChanged: function (value) {
+                if (value != null) {
+                    return this.$$('iron-ajax').url = value;
+                }
+            },
+            update: function () {
+                return this.$$('iron-ajax').generateRequest();
+            },
+            computeFilter: function (string) {
+                if (!string) {
+                    return null;
+                } else {
+                    string = string.toLowerCase();
+                    return function (row) {
+                        var message;
+                        message = row.message.toLowerCase();
+                        return message.indexOf(string) !== -1;
+                    };
+                }
+            }
+        });
+    </script>
+</dom-module>
