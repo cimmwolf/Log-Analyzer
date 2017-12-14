@@ -47,7 +47,7 @@ gulp.task('publish', ['default', 'compress-components'], function () {
         'bower_components/neon-*/*.html',
         'bower_components/platinum-*/*.html',
         'bower_components/polymer/*.html'
-    ], {base: 'node_modules/@bower_components'})
+    ], {base: 'bower_components'})
         .pipe(htmlMin({
             removeComments: true,
             preventAttributesEscaping: true,
