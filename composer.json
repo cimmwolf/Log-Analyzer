@@ -11,7 +11,9 @@
   ],
   "require": {
     "phpunit/phpunit": "^5.0.0",
-    "cimmwolf/bootstrap-material": "^0.0.1"
+    "cimmwolf/bootstrap-material": "^0.0.1",
+    "ext-curl": "*",
+    "mnapoli/silly": "^1.7"
   },
   "license": "MIT",
   "authors": [

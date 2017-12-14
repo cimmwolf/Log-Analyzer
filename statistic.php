@@ -4,12 +4,11 @@
  */
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$pathToDb = __DIR__ . '/store/' . $_GET['source'] . '.sqlite3';
-if (!isset($_GET['source']) OR !file_exists(__DIR__ . '/store/' . $_GET['source'] . '.sqlite3')) {
+if (!isset($_GET['source']) OR !file_exists(\DenisBeliaev\logAnalyzer\Log::getDbPath($_GET['source']))) {
     http_response_code(400);
     exit;
 }
 
-$Statistic = new \DenisBeliaev\logAnalyzer\Statistic($pathToDb);
+$Statistic = new \DenisBeliaev\logAnalyzer\Statistic($_GET['source']);
 
 \DenisBeliaev\logAnalyzer\U::jsonOut($Statistic->getHourlyData(), JSON_NUMERIC_CHECK);

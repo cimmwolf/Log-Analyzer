@@ -1,4 +1,5 @@
 <?php
+
 use DenisBeliaev\logAnalyzer\Statistic;
 
 /**
@@ -11,7 +12,7 @@ class StatisticTest extends \PHPUnit\Framework\TestCase
 
     public function testHourly()
     {
-        $Statistic = new Statistic($this->tempDb);
+        $Statistic = new Statistic('_temp');
         $data = $Statistic->getHourlyData();
         $this->assertCount(25, $data);
         foreach ($data as $key => $row) {

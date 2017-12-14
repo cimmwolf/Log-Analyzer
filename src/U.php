@@ -25,8 +25,8 @@ class U
                 if ($row['logTime'] > $lastLogTime) {
                     $stmt->execute([
                         ':logdate' => date('c', $row['logTime']),
-                        ':level' => $row['level'],
-                        ':message' => mb_convert_encoding($row['message'], 'utf-8')
+                        ':level'   => $row['level'],
+                        ':message' => mb_convert_encoding($row['message'], 'utf-8'),
                     ]);
                 }
             }
@@ -64,5 +64,21 @@ class U
         $pdo = new \PDO('sqlite:' . $pathToDb);
         new Migration($pdo);
         return $pdo;
+    }
+
+    public static function isUrlExist($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_exec($ch);
+        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        if ($code == 200) {
+            $status = true;
+        } else {
+            $status = false;
+        }
+        curl_close($ch);
+        return $status;
     }
 }

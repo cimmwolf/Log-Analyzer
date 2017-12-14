@@ -3,6 +3,7 @@
  * @author Denis Beliaev <cimmwolf@gmail.com>
  */
 require_once(__DIR__ . '/vendor/autoload.php');
+
 use DenisBeliaev\logAnalyzer\U;
 
 foreach (glob(__DIR__ . "/store/*.sqlite3") as $pathToDb) {

@@ -5,7 +5,7 @@ namespace DenisBeliaev\logAnalyzer;
 /**
  * @author Denis Beliaev <cimmwolf@gmail.com>
  */
-class Statistic extends DbLog
+class Statistic extends Log
 {
     /** Return statistic data grouped by hours.
      * @return array Format: [[Label1, .., LabelN], [Value1, .., ValueN], ..]
