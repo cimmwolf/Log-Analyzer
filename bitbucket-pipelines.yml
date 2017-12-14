@@ -1,0 +1,19 @@
+image: cimmwolf/dynamic
+
+pipelines:
+  branches:
+    master:
+      - step:
+          caches:
+            - node
+          script:
+            - BasePath="/var/www/logs.vistro.ru/staging"
+            - SharedPath="${BasePath}/../shared"
+            - RemoteMachine="deploy@logs.vistro.ru"
+            - ReleasePath="${BasePath}/releases/$(date '+%Y%m%d%H%M%S')"
+            - yarn run publish
+            - rsync -rlzv --delete --exclude-from=deploy_exclude.txt --link-dest=${BasePath}/current ./ ${RemoteMachine}:${ReleasePath}
+            - ssh $RemoteMachine "ln -vfn -s $ReleasePath ${BasePath}/current"
+            - ssh $RemoteMachine "ln -s ${SharedPath}/store/ ${ReleasePath}/store"
+            - ssh $RemoteMachine "cd ${BasePath}/releases && ls -1r | tail -n +2 | xargs rm -rf"
+            - ssh $RemoteMachine "sudo service nginx restart"

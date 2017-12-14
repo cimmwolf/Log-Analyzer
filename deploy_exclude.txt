@@ -1,0 +1,14 @@
+/.git/
+/.gitignore
+/bitbucket-pipelines.yml
+/bower.json
+/composer.*
+/deploy_*
+/gulpfile.js
+/package.json
+/README.md
+/router.php
+/src/
+/TESTING.md
+/tests/
+/typograph.php
