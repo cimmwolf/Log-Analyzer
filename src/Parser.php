@@ -7,8 +7,8 @@ namespace DenisBeliaev\logAnalyzer;
 
 class Parser
 {
-    protected $filename;
     public $lastModified;
+    protected $filename;
 
     /**
      * @param string $filename
@@ -69,8 +69,15 @@ class Parser
             '\DenisBeliaev\logAnalyzer\YiiLogParser',
             '\DenisBeliaev\logAnalyzer\NginxLogParser',
         ];
-        $parserClass = preg_replace($patterns, $replacements, $log[0], 1);
-        if($parserClass == $log[0])
+
+        $parserClass = $log[0];
+        foreach ($log as $row) {
+            $parserClass = preg_replace($patterns, $replacements, $row, 1);
+            if (in_array($parserClass, $replacements))
+                break;
+        }
+
+        if (!in_array($parserClass, $replacements))
             throw new \UnexpectedValueException('Unknown log type!');
 
         return $parserClass::parse($log);

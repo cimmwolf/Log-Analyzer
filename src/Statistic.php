@@ -42,6 +42,8 @@ class Statistic extends Log
 
             $t += 60 * 60;
         }
+        if (count($output) == 1)
+            $output[] = [time(), 0, 0, 0];
         return $output;
     }
 }
