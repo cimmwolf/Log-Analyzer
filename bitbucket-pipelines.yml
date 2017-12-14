@@ -14,6 +14,7 @@ pipelines:
             - yarn run publish
             - rsync -rlzv --delete --exclude-from=deploy_exclude.txt --link-dest=${BasePath}/current ./ ${RemoteMachine}:${ReleasePath}
             - ssh $RemoteMachine "ln -vfn -s $ReleasePath ${BasePath}/current"
+            - ssh $RemoteMachine "mv -f ${ReleasePath}/store/* ${SharedPath}/store/ && rm -r ${ReleasePath}/store"
             - ssh $RemoteMachine "ln -s ${SharedPath}/store/ ${ReleasePath}/store"
             - ssh $RemoteMachine "cd ${BasePath}/releases && ls -1r | tail -n +2 | xargs rm -rf"
             - ssh $RemoteMachine "sudo service nginx restart"
