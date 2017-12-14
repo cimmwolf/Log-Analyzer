@@ -1,0 +1,33 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="log-flow-message">
+    <template>
+        <style>
+            :host { display: inline; word-break: break-all; }
+        </style>
+        <span id="message"></span>
+    </template>
+    <script>
+        Polymer({
+            is: 'log-flow-message',
+            properties: {
+                message: String
+            },
+            ready: function () {
+                return this.$.message.innerHTML = this.message.replace(/(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/gi, function (match) {
+                    return decodeURI(match);
+                }).replace(/(GET )(.*?%.*?)( HTTP\/)/g, function (match, p1, p2, p3) {
+                    var decodedUri, e;
+                    try {
+                        decodedUri = decodeURIComponent(p2);
+                    } catch (error) {
+                        e = error;
+                        console.log(e.message + ':' + p2);
+                        decodedUri = p2;
+                    }
+                    return p1 + decodedUri + p3;
+                }).replace(/"?((\/[a-z0-9_.-]*?){3,}\/([a-z0-9_.-]+\/?))"?(:?)/gi, '<span class="text-nowrap" title="$1">(..)/$3</span>$4');
+            }
+        });
+    </script>
+</dom-module>
