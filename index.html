@@ -1,10 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="generator" content="Polymer Starter Kit">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
+    <title>Logs analyzer</title>
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#3f51b5">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Log analyzer">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="My App">
+
+    <!-- Homescreen icons -->
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/img/apple-touch-icon-57x57.png" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/apple-touch-icon-114x114.png" />
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/apple-touch-icon-72x72.png" />
@@ -18,7 +36,6 @@
     <link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16" />
     <link rel="icon" type="image/png" href="/img/favicon-128.png" sizes="128x128" />
-    <meta name="application-name" content="&nbsp;"/>
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="msapplication-TileImage" content="/img/mstile-144x144.png" />
     <meta name="msapplication-square70x70logo" content="/img/mstile-70x70.png" />
@@ -26,26 +43,50 @@
     <meta name="msapplication-wide310x150logo" content="/img/mstile-310x150.png" />
     <meta name="msapplication-square310x310logo" content="/img/mstile-310x310.png" />
 
-    <link rel="stylesheet" type="text/css" href="/dist/css/style.css">
-
-    <title>Logs Analyzer</title>
-
     <script>
-        (function () {
-            if ('registerElement' in document
-                && 'import' in document.createElement('link')
-                && 'content' in document.createElement('template')) {
-                // platform is good!
-            } else
-                document.write('<script src="/bower_components/webcomponentsjs/webcomponents-lite.min.js"><\/script>');
-        })();
+        window.Polymer = {rootPath: '/'};
+
+        // Load and register pre-caching Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js', {
+                    scope: Polymer.rootPath
+                });
+            });
+        }
     </script>
 
-    <link rel="import" href="/components/log-app.html">
+    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <link rel="import" href="components/logs-analyzer.html">
+
+    <style>
+        html {
+            line-height: 1.4;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+            font-family: 'Roboto', 'Noto', sans-serif;}
+
+        body {
+            margin: 0;
+            background: #363739 url('/bower_components/d-style/main-background.jpg'); }
+
+        logs-analyzer {
+            --success-color: #3c763d;
+            --warning-color: #8a6d3b;
+            --primary-text-color: #fff;
+            --primary-background-color: rgba(0, 0, 0, 0.7);
+            --accent-color: #ff9100;
+            --paper-button: {
+                color: var(--accent-color);
+            }
+        }
+    </style>
 </head>
-<body class="main-background">
-
-<log-app></log-app>
-
+<body>
+<logs-analyzer></logs-analyzer>
+<noscript>
+    Please enable JavaScript to view this website.
+</noscript>
 </body>
 </html>

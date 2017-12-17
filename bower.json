@@ -15,9 +15,26 @@
     "tests"
   ],
   "dependencies": {
-    "google-chart": "GoogleWebComponents/google-chart#^1.0.6",
-    "iron-ajax": "PolymerElements/iron-ajax#^1.4.3",
+    "google-chart": "GoogleWebComponents/google-chart#^2.0",
+    "iron-ajax": "PolymerElements/iron-ajax#^2.0",
     "moment": "^2.14.1",
-    "paper-input": "PolymerElements/paper-input#^1.1.17"
+    "paper-input": "PolymerElements/paper-input#^2.0",
+    "app-layout": "PolymerElements/app-layout#^2.0.0",
+    "app-route": "PolymerElements/app-route#^2.0.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^2.0.0",
+    "iron-media-query": "PolymerElements/iron-media-query#^2.0.0",
+    "iron-pages": "PolymerElements/iron-pages#^2.0.0",
+    "iron-selector": "PolymerElements/iron-selector#^2.0.0",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
+    "polymer": "Polymer/polymer#^2.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "d-style": "master"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0"
   }
 }

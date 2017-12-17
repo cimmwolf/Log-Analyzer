@@ -7,6 +7,8 @@
         <style>
             :host { display: block; position: relative; }
 
+            google-chart {width: 100%}
+
             .update-mark { position: absolute; right: 15px; top: 25px; font-size: 80%; }
         </style>
         <iron-ajax auto handle-as="json" on-response="handleResponse"></iron-ajax>
@@ -69,7 +71,7 @@
             },
             computeUMark: function (lastUpdate) {
                 if ((Date.now() - lastUpdate) > 60 * 4 * 1000) {
-                    return this.domHost.smartDate(lastUpdate);
+                    return MyView1.smartDate(lastUpdate);
                 } else {
                     return '';
                 }

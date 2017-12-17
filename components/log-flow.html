@@ -47,7 +47,7 @@
                 data = this.$$('iron-ajax').lastResponse;
                 for (i = 0, len = data.length; i < len; i++) {
                     row = data[i];
-                    row.logdate = this.domHost.smartDate(row.logdate * 1000);
+                    row.logdate = MyView1.smartDate(row.logdate * 1000);
                 }
                 this.data = data;
                 return this.lastUpdate = Date.now();

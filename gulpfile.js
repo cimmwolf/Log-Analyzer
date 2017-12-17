@@ -1,44 +1,27 @@
-var gulp = require('gulp');
-var less = require('gulp-less');
-var autoprefixer = require('autoprefixer');
-var cssNano = require('cssnano');
-var htmlMin = require('gulp-htmlmin');
-var postCss = require('gulp-postcss');
-var postCssHtml = require('gulp-html-postcss');
+/* global require */
 
-gulp.task('default', ['less'], function () {
-    return gulp.src('dist/css/*.css')
-        .pipe(postCss([
-            autoprefixer,
-            cssNano({safe: true})
-        ]))
-        .pipe(gulp.dest('dist/css'));
-});
+let gulp = require('gulp');
+let autoPrefix = require('autoprefixer');
+let cssNano = require('cssnano');
+let htmlMin = require('gulp-htmlmin');
+let postCssHtml = require('gulp-html-postcss');
 
-gulp.task('less', function () {
-    return gulp.src('src/less/style.less')
-        .pipe(less({
-            paths: ['vendor/twbs/bootstrap/less']
-        }))
-        .pipe(gulp.dest('dist/css'));
-});
-
-gulp.task('compress-components', function () {
-    return gulp.src('components/*-*.html')
+gulp.task('compress-components', function() {
+    return gulp.src('src/components/*-*.html')
         .pipe(htmlMin({
             removeComments: true,
             preventAttributesEscaping: true,
             collapseWhitespace: true,
-            minifyJS: true
+            minifyJS: true,
         }))
         .pipe(postCssHtml([
-            autoprefixer,
-            cssNano({safe: true})
+            autoPrefix,
+            cssNano({safe: true}),
         ]))
         .pipe(gulp.dest('components'));
 });
 
-gulp.task('publish', ['default', 'compress-components'], function () {
+gulp.task('publish', ['compress-components'], function() {
     return gulp.src([
         'bower_components/iron-*/*.html',
         'bower_components/paper-*/*.html',
@@ -46,14 +29,14 @@ gulp.task('publish', ['default', 'compress-components'], function () {
         'bower_components/gold-*/*.html',
         'bower_components/neon-*/*.html',
         'bower_components/platinum-*/*.html',
-        'bower_components/polymer/*.html'
+        'bower_components/polymer/*.html',
     ], {base: 'bower_components'})
         .pipe(htmlMin({
             removeComments: true,
             preventAttributesEscaping: true,
             collapseWhitespace: true,
             minifyJS: true,
-            minifyCSS: true
+            minifyCSS: true,
         }))
         .pipe(gulp.dest('bower_components'));
 });

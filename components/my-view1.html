@@ -1,0 +1,115 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/d-style/d-style.html">
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="log-statistic.html">
+<link rel="import" href="log-flow.html">
+
+<dom-module id="my-view1">
+    <template>
+        <style include="d-style iron-flex iron-flex-alignment">
+            :host {
+                display: block;
+                padding: 10px;
+            }
+
+            @media (min-width: 768px) {
+                .log {width: calc(50% - 30px);}
+            }
+        </style>
+
+        <iron-ajax auto url="/cron.php" id="cron" method="post" on-response="cronComplete"></iron-ajax>
+        <iron-ajax auto url="/logs.php" handle-as="json" on-response="handleResponse" id="logsRequest"></iron-ajax>
+        <div class="layout horizontal justified wrap ">
+            <template is="dom-repeat" items="{{logs}}">
+                <div class="log">
+                    <h1 class="text-center">{{item.name}}</h1>
+                    <log-statistic source="{{item.chartSrc}}"></log-statistic>
+                    <log-flow source="{{item.flowSrc}}"></log-flow>
+                </div>
+            </template>
+        </div>
+    </template>
+
+    <script>
+        class MyView1 extends Polymer.Element {
+            static get is() {
+                return 'my-view1';
+            }
+
+            handleResponse() {
+                let names = this.$.logsRequest.lastResponse;
+                this.logs = [];
+                let results = [];
+                let name;
+                for (let i = 0, len = names.length; i < len; i++) {
+                    name = names[i];
+                    results.push(this.push('logs', {
+                        name: name,
+                        chartSrc: '/statistic.php?source=' + name,
+                        flowSrc: '/data.php?source=' + name,
+                    }));
+                }
+                return results;
+            }
+
+            cronComplete() {
+                let element;
+                let ref = this.querySelectorAll('log-statistic');
+                for (let i = 0, len = ref.length; i < len; i++) {
+                    element = ref[i];
+                    element.update();
+                }
+                let ref1 = this.querySelectorAll('log-flow');
+                let results = [];
+                for (let j = 0, len1 = ref1.length; j < len1; j++) {
+                    element = ref1[j];
+                    results.push(element.update());
+                }
+                setInterval(function() {
+                    this.$.cron.generateRequest();
+                }.bind(this), 60000);
+            }
+
+            static smartDate(timestamp) {
+                /* global moment */
+                let diff = Date.now() - timestamp;
+                diff /= 1000;
+                if (diff < 60) {
+                    return Math.floor(diff) + ' s. ago';
+                }
+                if (diff < 60 * 60) {
+                    return Math.floor(diff / 60) + ' min. ago';
+                }
+                let today = moment().startOf('day');
+                let yesterday = moment().startOf('day').subtract(1, 'days');
+                timestamp = moment(timestamp);
+                if (timestamp.isSame(today, 'day')) {
+                    if (diff < 60 * 60 * 1.5) {
+                        return '1 h. ago';
+                    }
+                    if (diff < 60 * 60 * 2) {
+                        return '1.5 h. ago';
+                    }
+                    if (diff < 60 * 60 * 2.5) {
+                        return '2 h. ago';
+                    }
+                    if (diff < 60 * 60 * 3) {
+                        return '2.5 h. ago';
+                    }
+                    if (diff < 60 * 60 * 3.5) {
+                        return '3 h. ago';
+                    }
+                    return 'today at ' + timestamp.format('HH:mm');
+                }
+                if (timestamp.isSame(yesterday, 'day')) {
+                    return 'yesterday at ' + timestamp.format('HH:mm');
+                }
+                return timestamp.format('D MMM, HH:mm');
+            }
+        }
+
+        window.customElements.define(MyView1.is, MyView1);
+    </script>
+</dom-module>

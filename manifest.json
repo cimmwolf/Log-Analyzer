@@ -1,0 +1,21 @@
+{
+  "name": "Logs analyzer",
+  "short_name": "Logs analyzer",
+  "description": "Errors log analyzer for Yii and Nginx logs | Анализатор лога ошибок для Yii и Nginx",
+  "icons": [
+    {
+      "src": "img/favicon-196x196.png",
+      "sizes": "196x196",
+      "type": "image/png"
+    },
+    {
+      "src": "img/favicon-310x310.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#3f51b5",
+  "background_color": "#3f51b5"
+}

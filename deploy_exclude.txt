@@ -9,5 +9,5 @@
 /README.md
 /router.php
 /TESTING.md
-/tests/
+/test/
 /typograph.php
